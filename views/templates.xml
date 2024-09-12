@@ -1,0 +1,164 @@
+<odoo>
+    <!-- Vistas para el modelo 'school.subject' -->
+    <record id="view_school_subject_form" model="ir.ui.view">
+        <field name="name">school.subject.form</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <form string="Asignatura">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="credits"/>
+
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="teacher_id"/>
+                            <field name="max_students"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="student_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_subject_tree" model="ir.ui.view">
+        <field name="name">school.subject.tree</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <tree string="Asignaturas">
+                <field name="name"/>
+                <field name="credits"/>
+                <field name="max_students"/>
+                <field name="active"/>
+                <field name="teacher_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_subject_search" model="ir.ui.view">
+        <field name="name">school.subject.search</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Asignaturas">
+                <field name="name"/>
+                <field name="teacher_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vistas para el modelo 'school.student' -->
+    <record id="view_school_student_form" model="ir.ui.view">
+        <field name="name">school.student.form</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <form string="Estudiante">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="birth_date"/>
+                        <field name="age"/>
+                        <field name="final_exam_grade"/>
+                        <field name="subject_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_student_tree" model="ir.ui.view">
+        <field name="name">school.student.tree</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <tree string="Estudiantes">
+                <field name="name"/>
+                <field name="birth_date"/>
+                <field name="age"/>
+                <field name="final_exam_grade"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_student_search" model="ir.ui.view">
+        <field name="name">school.student.search</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Estudiantes">
+                <field name="name"/>
+                <field name="subject_ids"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vistas para el modelo 'school.teacher' -->
+    <record id="view_school_teacher_form" model="ir.ui.view">
+        <field name="name">school.teacher.form</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <form string="Profesor">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="profile"/>
+                        <field name="subject_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_school_teacher_tree" model="ir.ui.view">
+        <field name="name">school.teacher.tree</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <tree string="Profesores">
+                <field name="name"/>
+                <field name="profile"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_teacher_search" model="ir.ui.view">
+        <field name="name">school.teacher.search</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Profesores">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acciones -->
+    <record id="action_school_subject" model="ir.actions.act_window">
+        <field name="name">Asignaturas</field>
+        <field name="res_model">school.subject</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="view_id" ref="view_school_subject_tree"/>
+    </record>
+
+    <record id="action_school_student" model="ir.actions.act_window">
+        <field name="name">Estudiantes</field>
+        <field name="res_model">school.student</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="view_id" ref="view_school_student_tree"/>
+    </record>
+
+    <record id="action_school_teacher" model="ir.actions.act_window">
+        <field name="name">Profesores</field>
+        <field name="res_model">school.teacher</field>
+        <field name="view_mode">tree,form,search</field>
+        <field name="view_id" ref="view_school_teacher_tree"/>
+    </record>
+
+    <!-- Menús -->
+    <menuitem id="menu_school_root" name="Gestión de Escuela" sequence="10"/>
+
+    <!-- Submenús -->
+    <menuitem id="menu_school_student" name="Estudiantes" parent="menu_school_root" action="action_school_student"/>
+    <menuitem id="menu_school_teacher" name="Profesores" parent="menu_school_root" action="action_school_teacher"/>
+    <menuitem id="menu_school_subject" name="Asignaturas" parent="menu_school_root" action="action_school_subject"/>
+</odoo>
